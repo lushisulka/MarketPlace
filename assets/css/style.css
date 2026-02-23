@@ -1,0 +1,58 @@
+:root {
+    --green-primary: #198754;
+    --green-light: #d1e7dd;
+    --yellow: #ffc107;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f8f9fa;
+}
+
+/* Cards */
+.product-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1) !important;
+}
+
+.category-card {
+    transition: transform 0.2s;
+}
+
+.category-card:hover {
+    transform: scale(1.05);
+    color: var(--green-primary) !important;
+}
+
+/* Hero */
+.hero-section {
+    background: linear-gradient(135deg, #155724, #198754);
+}
+
+/* Badges */
+.badge-certified {
+    background: linear-gradient(45deg, #ffc107, #ff8f00);
+    color: #000;
+}
+
+/* Navbar */
+.navbar {
+    backdrop-filter: blur(10px);
+}
+
+/* Sidebar */
+@media (max-width: 768px) {
+    .sticky-top {
+        position: relative !important;
+    }
+}
+
+/* Dashboard cards */
+.stat-card {
+    border-left: 4px solid var(--green-primary);
+}
