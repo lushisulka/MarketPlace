@@ -110,7 +110,7 @@ require_once __DIR__ . '/../includes/navbar.php';
     <div class="text-center py-5">
         <div class="fs-1">😔</div>
         <h5 class="text-muted mt-3">Nuk u gjet asgjë për "<?= $q ?>"</h5>
-        <a href="products.php" class="btn btn-success mt-3">Shiko të gjitha produktet</a>
+        <a href="products.php" class="btn btn-success mt-3">Shiko të gjitha produktet ketu</a>
     </div>
     <?php endif; ?>
 

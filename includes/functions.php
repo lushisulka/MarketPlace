@@ -94,3 +94,4 @@ function getFlash() {
     }
     return null;
 }
+console.log('functions.php loaded');

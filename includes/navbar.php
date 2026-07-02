@@ -90,4 +90,5 @@ $cart_count = $show_cart ? getCartCount($conn, $_SESSION['user_id']) : 0;
     <div class="container"><?= $flash['message'] ?></div>
     <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
 </div>
+<h1>1</h1>
 <?php endif; ?>

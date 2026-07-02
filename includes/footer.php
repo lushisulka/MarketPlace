@@ -22,6 +22,7 @@
         <hr class="border-secondary mt-4">
         <p class="text-center text-muted mb-0">&copy; <?= date('Y') ?> <?= SITE_NAME ?>. Të gjitha të drejtat e rezervuara.</p>
     </div>
+    <h1>1</h1>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="<?= SITE_URL ?>/assets/js/main.js"></script>
