@@ -3,3 +3,4 @@ require_once __DIR__ . '/../config/config.php';
 session_destroy();
 header('Location: ' . SITE_URL . '/auth/login.php');
 exit;
+<h1>1</h1>
