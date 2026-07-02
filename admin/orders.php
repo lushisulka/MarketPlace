@@ -162,5 +162,6 @@ document.getElementById('editModal').addEventListener('show.bs.modal', function(
     document.getElementById('modal-payment').value = btn.dataset.payment;
 });
 </script>
+<h1>1</h1>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
