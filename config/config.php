@@ -2,7 +2,7 @@
 session_start();
 
 define('SITE_URL', 'http://localhost/marketplace');
-define('SITE_NAME', 'FrutaMarket');
+define('SITE_NAME', 'FreshMarket');
 define('UPLOAD_PATH', $_SERVER['DOCUMENT_ROOT'] . '/marketplace/uploads/');
 
 // Auto-load database

@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($errors)) {
         if ($edit_id && $edit_product) {
             $stmt = $conn->prepare("UPDATE products SET name=?, description=?, price=?, b2b_price=?, stock=?, unit=?, category_id=?, is_organic=?, status=?, image=? WHERE id=? AND partner_id=?");
-            $stmt->bind_param("ssdddsiissi i", $name, $description, $price, $b2b_price, $stock, $unit, $category_id, $is_organic, $status, $image_name, $edit_id, $pid);
+            $stmt->bind_param("ssdddsiissii", $name, $description, $price, $b2b_price, $stock, $unit, $category_id, $is_organic, $status, $image_name, $edit_id, $pid);
         } else {
             $slug = createSlug($name) . '-' . uniqid();
             $stmt = $conn->prepare("INSERT INTO products (partner_id, category_id, name, slug, description, price, b2b_price, stock, unit, is_organic, image, status) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)");

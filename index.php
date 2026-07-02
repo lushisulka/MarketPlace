@@ -15,42 +15,89 @@ $products = $conn->query("
     ORDER BY p.created_at DESC LIMIT 8
 ")->fetch_all(MYSQLI_ASSOC);
 
-// Merr partneret e certifikuar
+// Merr partneret e certifikuar — pa limit
 $partners = $conn->query("
     SELECT pt.*, u.name, u.profile_image 
     FROM partners pt JOIN users u ON pt.user_id = u.id
     WHERE pt.status = 'approved' AND pt.is_certified = 1
-    LIMIT 4
+    ORDER BY pt.rating DESC
 ")->fetch_all(MYSQLI_ASSOC);
 
 require_once __DIR__ . '/includes/header.php';
 require_once __DIR__ . '/includes/navbar.php';
 ?>
 
-<!-- HERO SECTION -->
-<div class="hero-section bg-success text-white py-5">
-    <div class="container text-center py-4">
-        <h1 class="display-4 fw-bold mb-3">Fruta & Perime të Freskëta</h1>
-        <p class="lead mb-4 opacity-75">Drejtpërdrejt nga fermerët e certifikuar tek tryeza juaj</p>
-        <form class="d-flex justify-content-center" action="<?= SITE_URL ?>/pages/search.php" method="GET">
-            <div class="input-group w-50 shadow-lg">
-                <input class="form-control form-control-lg" type="search" name="q" placeholder="Kërko produkte...">
-                <button class="btn btn-warning btn-lg fw-bold" type="submit">
+<!-- ═══════════════════════════════════════════════
+     HERO SECTION — Foto background, tekst sipër
+════════════════════════════════════════════════ -->
+<div class="hero-section position-relative overflow-hidden" style="height:520px;">
+
+    <!-- Foto background (Unsplash - fruta/perime) -->
+        <img src="<?= SITE_URL ?>/assets/wallpaper.jpg"
+         alt="Fruta dhe Perime të Freskëta"
+         style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;">
+
+    <!-- Overlay i errët për kontrast -->
+    <div style="position:absolute;top:0;left:0;width:100%;height:100%;
+                background:linear-gradient(135deg,rgba(0,0,0,0.55),rgba(21,87,36,0.6));
+                z-index:1;"></div>
+
+    <!-- Teksti dhe Search Bar -->
+    <div class="container text-center text-white position-relative h-100
+                d-flex flex-column justify-content-center align-items-center"
+         style="z-index:2;">
+
+        <span class="badge bg-warning text-dark mb-3 px-3 py-2 fs-6 shadow">
+            ✅ Platformë e Certifikuar
+        </span>
+
+        <h1 class="display-3 fw-bold mb-3"
+            style="text-shadow:0 3px 12px rgba(0,0,0,0.7); letter-spacing:-0.5px;">
+             Produkte të Freskëta
+        </h1>
+
+        <p class="lead fs-4 mb-4"
+           style="text-shadow:0 1px 6px rgba(0,0,0,0.6); opacity:0.95; max-width:600px;">
+            Drejtpërdrejt nga fermerët e certifikuar tek tryeza juaj
+        </p>
+
+        <!-- Search bar -->
+        <form class="d-flex justify-content-center w-100 mb-4"
+              action="<?= SITE_URL ?>/pages/search.php" method="GET">
+            <div class="input-group shadow-lg" style="max-width:580px;">
+                <input class="form-control form-control-lg border-0"
+                       type="search" name="q"
+                       placeholder="Kërko fruta, perime, partnerë...">
+                <button class="btn btn-warning btn-lg fw-bold px-4" type="submit">
                     <i class="fas fa-search me-2"></i>Kërko
                 </button>
             </div>
         </form>
+
+        <!-- Butonët CTA -->
+        <div class="d-flex gap-3 flex-wrap justify-content-center">
+            <a href="<?= SITE_URL ?>/pages/products.php"
+               class="btn btn-success btn-lg px-4 fw-bold shadow-lg">
+                Bli Tani
+            </a>
+            <a href="<?= SITE_URL ?>/auth/register.php?type=partner"
+               class="btn btn-outline-light btn-lg px-4 shadow-lg">
+                Bëhu Partner
+            </a>
+        </div>
     </div>
 </div>
 
-<!-- KATEGORITE -->
+<!-- ═══════════════════════════════════════════════
+     KATEGORITE
+════════════════════════════════════════════════ -->
 <section class="py-5 bg-light">
     <div class="container">
         <h2 class="text-center fw-bold mb-4">Kategoritë</h2>
         <div class="row g-3">
             <?php foreach ($categories as $cat): ?>
             <div class="col-6 col-md-4 col-lg-2">
-                <a href="<?= SITE_URL ?>/pages/products.php?category=<?= $cat['slug'] ?>" 
+                <a href="<?= SITE_URL ?>/pages/products.php?category=<?= $cat['slug'] ?>"
                    class="card text-center text-decoration-none border-0 shadow-sm h-100 category-card">
                     <div class="card-body py-4">
                         <div class="fs-1 mb-2"><?= $cat['icon'] ?></div>
@@ -63,7 +110,9 @@ require_once __DIR__ . '/includes/navbar.php';
     </div>
 </section>
 
-<!-- PRODUKTET E FUNDIT -->
+<!-- ═══════════════════════════════════════════════
+     PRODUKTET E FUNDIT
+════════════════════════════════════════════════ -->
 <section class="py-5">
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mb-4">
@@ -75,8 +124,9 @@ require_once __DIR__ . '/includes/navbar.php';
             <div class="col-6 col-md-4 col-lg-3">
                 <div class="card h-100 shadow-sm border-0 product-card">
                     <div class="position-relative">
-                        <img src="<?= $p['image'] ? SITE_URL . '/uploads/products/' . $p['image'] : SITE_URL . '/assets/images/no-image.png' ?>" 
-                             class="card-img-top" alt="<?= $p['name'] ?>" style="height:200px; object-fit:cover;">
+                        <img src="<?= $p['image'] ? SITE_URL . '/uploads/products/' . $p['image'] : SITE_URL . '/assets/images/no-image.png' ?>"
+                             class="card-img-top" alt="<?= $p['name'] ?>"
+                             style="height:200px; object-fit:cover;">
                         <?php if ($p['is_certified']): ?>
                         <span class="position-absolute top-0 end-0 m-2 badge bg-warning text-dark">
                             ✅ Certifikuar
@@ -93,7 +143,7 @@ require_once __DIR__ . '/includes/navbar.php';
                         </div>
                     </div>
                     <div class="card-footer bg-transparent border-0 pb-3">
-                        <a href="<?= SITE_URL ?>/pages/product_detail.php?id=<?= $p['id'] ?>" 
+                        <a href="<?= SITE_URL ?>/pages/product_detail.php?id=<?= $p['id'] ?>"
                            class="btn btn-success w-100">Shiko Detaje</a>
                     </div>
                 </div>
@@ -103,22 +153,29 @@ require_once __DIR__ . '/includes/navbar.php';
     </div>
 </section>
 
-<!-- PARTNERËT E CERTIFIKUAR -->
+<!-- ═══════════════════════════════════════════════
+     PARTNERËT E CERTIFIKUAR
+════════════════════════════════════════════════ -->
 <?php if (!empty($partners)): ?>
 <section class="py-5 bg-light">
     <div class="container">
-        <h2 class="text-center fw-bold mb-4">Partnerë të Certifikuar</h2>
+        <h2 class="text-center fw-bold mb-4"> Partnerë të Certifikuar</h2>
         <div class="row g-4 justify-content-center">
             <?php foreach ($partners as $pt): ?>
-            <div class="col-md-3">
+            <div class="col-6 col-md-4 col-lg-3">
                 <div class="card text-center border-0 shadow-sm h-100">
                     <div class="card-body py-4">
-                        <div class="fs-1 mb-3">🏪</div>
-                        <h5 class="fw-bold"><?= $pt['business_name'] ?></h5>
+                        <!-- Avatar me inicialen -->
+                        <div class="rounded-circle bg-success text-white fw-bold d-flex align-items-center
+                                    justify-content-center mx-auto mb-3"
+                             style="width:65px;height:65px;font-size:1.8rem;">
+                            <?= strtoupper(substr($pt['business_name'], 0, 1)) ?>
+                        </div>
+                        <h5 class="fw-bold mb-1"><?= $pt['business_name'] ?></h5>
                         <span class="badge bg-warning text-dark mb-2">✅ Partner i Certifikuar</span>
-                        <div class="mb-2"><?= renderStars($pt['rating']) ?></div>
-                        <a href="<?= SITE_URL ?>/pages/partner_profile.php?id=<?= $pt['id'] ?>" 
-                           class="btn btn-outline-success btn-sm">Shiko Profilin</a>
+                        <div class="mb-3"><?= renderStars($pt['rating']) ?></div>
+                        <a href="<?= SITE_URL ?>/pages/partner_profile.php?id=<?= $pt['id'] ?>"
+                           class="btn btn-outline-success btn-sm px-3">Shiko Profilin</a>
                     </div>
                 </div>
             </div>
@@ -128,7 +185,9 @@ require_once __DIR__ . '/includes/navbar.php';
 </section>
 <?php endif; ?>
 
-<!-- PERSE NE -->
+<!-- ═══════════════════════════════════════════════
+     PERSE NA ZGJIDHNI
+════════════════════════════════════════════════ -->
 <section class="py-5 bg-success text-white">
     <div class="container">
         <h2 class="text-center fw-bold mb-5">Pse të na zgjidhni?</h2>
