@@ -234,6 +234,6 @@ $orders = $conn->query("
         </div>
     </div>
 </div>
-<h1>1</h1>
+<h6>-</h6>
 
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>

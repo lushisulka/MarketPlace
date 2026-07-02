@@ -332,7 +332,6 @@ require_once __DIR__ . '/../includes/navbar.php';
                             <a href="product_detail.php?id=<?= $sp['id'] ?>" class="btn btn-sm btn-outline-success">Shiko</a>
                         </div>
                     </div>
-                    <h1>1</h1>
                 </div>
             </div>
             <?php endforeach; ?>

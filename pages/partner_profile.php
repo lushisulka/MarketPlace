@@ -238,7 +238,6 @@ require_once __DIR__ . '/../includes/navbar.php';
             </div>
             <?php endif; ?>
         </div>
-        <h1>1</h1>
     </div>
 </div>
 

@@ -32,4 +32,3 @@ $menu = [
         <?php endforeach; ?>
     </ul>
 </div>
-<h1>1</h1>

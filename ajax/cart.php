@@ -66,4 +66,3 @@ if ($action === 'add') {
 } else {
     echo json_encode(['error' => 'Veprim i panjohur.']);
 }
-<h1>1</h1>
